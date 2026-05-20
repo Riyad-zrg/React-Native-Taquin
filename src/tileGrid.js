@@ -3,7 +3,9 @@ import { Text, StyleSheet, View } from "react-native";
 import Tile from "./tile.js";
 import { useState } from "react";
 export default function TileGrid({ dimension }) {
-  const [tilesValues, setTilesValues] = useState([1, 2, 3, 4, 5, 6, 7, 8, 0]);
+  const [tilesValues, setTilesValues] = useState(
+    shuffleTaquin({[1, 2, 3, 4, 5, 6, 7, 8, 0]}),
+  );
   return (
     <View style={styles.container}>
       <Text style={styles.score}>score:42</Text>
@@ -40,3 +42,15 @@ const styles = StyleSheet.create({
     color: "gray",
   },
 });
+
+function shuffleTaquin({ taquinList }) {
+  for (let i = 0; i < 20; i++) {
+    const indexEmpty = taquinList.indexOf(0);
+    const random = Math.randint(-1, 1);
+    const temp = taquinList[indexEmpty];
+    taquinList[indexEmpty] = taquinList[indexEmpty + random];
+    taquinList[indexEmpty + random] = temp;
+  }
+
+  return taquinList;
+}
