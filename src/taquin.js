@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import Title from "./title";
 import TileGrid from "./tileGrid";
+import PictureSelector from "./pictureSelector";
 
 export default function Taquin() {
   return (
@@ -9,6 +10,7 @@ export default function Taquin() {
       <StatusBar style="light" />
       <Title />
       <TileGrid />
+      <PictureSelector />
     </View>
   );
 }
