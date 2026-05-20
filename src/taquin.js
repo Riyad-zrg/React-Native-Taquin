@@ -3,14 +3,28 @@ import { StyleSheet, View } from "react-native";
 import Title from "./title";
 import TileGrid from "./tileGrid";
 import PictureSelector from "./pictureSelector";
+import Footer from "./footer";
+import { useState } from "react";
 
 export default function Taquin() {
+  const [minDimension, setMinDimension] = useState(100);
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onLayout={(event) => {
+        setMinDimension(
+          Math.min(
+            event.nativeEvent.layout.height,
+            event.nativeEvent.layout.width,
+          ),
+        );
+      }}
+    >
       <StatusBar style="light" />
       <Title />
-      <TileGrid />
+      <TileGrid dimension={minDimension} />
       <PictureSelector />
+      <Footer />
     </View>
   );
 }

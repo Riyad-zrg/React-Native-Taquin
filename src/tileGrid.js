@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import { Text, StyleSheet, View } from "react-native";
-export default function TileGrid(dimension) {
+export default function TileGrid({ dimension }) {
   return (
     <View style={styles.container}>
       <Text style={styles.score}>score:42</Text>
-      <View style={styles.grid}></View>
+      <View
+        style={{ height: dimension, width: dimension, borderWidth: 1 }}
+      ></View>
     </View>
   );
 }
@@ -16,7 +18,7 @@ TileGrid.propTypes = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    flex: 10,
+    flex: 6,
     flexDirection: "column",
     width: "100%",
   },
