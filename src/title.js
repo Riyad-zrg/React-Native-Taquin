@@ -3,7 +3,7 @@ import { Text, StyleSheet, View } from "react-native";
 export default function Title() {
   return (
     <View style={styles.container}>
-      <Text>Mon Taquin</Text>
+      <Text style={styles.text}>Mon Taquin</Text>
     </View>
   );
 }
@@ -14,5 +14,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     width: "100%",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: 30,
+    color: "lightgray",
+    fontWeight: "500",
+    alignSelf: "center",
   },
 });
