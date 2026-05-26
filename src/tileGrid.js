@@ -2,9 +2,10 @@ import PropTypes from "prop-types";
 import { Text, StyleSheet, View, Modal, Pressable, Alert } from "react-native";
 import Tile from "./tile.js";
 import { useState } from "react";
-export default function TileGrid({ dimension }) {
+export default function TileGrid({ dimension, sourcePicture }) {
   const [tilesValues, setTilesValues] = useState(
-    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
+    // shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
+    [1, 2, 3, 4, 5, 6, 8, 7, 0],
   );
 
   const [score, setScore] = useState(0);
@@ -75,6 +76,7 @@ export default function TileGrid({ dimension }) {
             tileSize={dimension / 3}
             value={number}
             tilePressHandler={tilePress}
+            sourcePicture={sourcePicture}
           />
         ))}
         <Modal
@@ -111,6 +113,7 @@ export default function TileGrid({ dimension }) {
 
 TileGrid.propTypes = {
   dimension: PropTypes.number,
+  sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 };
 
 const styles = StyleSheet.create({

@@ -22,7 +22,12 @@ export default function Taquin() {
     >
       <StatusBar style="light" />
       <Title />
-      <TileGrid dimension={minDimension} />
+      <TileGrid
+        dimension={minDimension}
+        sourcePicture={
+          "https://www.freedigitalphotos.net/images/img/homepage/87357.jpg"
+        }
+      />
       <PictureSelector />
       <Footer />
     </View>
