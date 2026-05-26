@@ -1,7 +1,7 @@
 import PropTypes, { number } from "prop-types";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-export default function Tile({ tileSize, value }) {
+export default function Tile({ tileSize, value, tilePressHandler }) {
   if (value === 0) {
     return (
       <View
@@ -15,21 +15,24 @@ export default function Tile({ tileSize, value }) {
     );
   }
   return (
-    <View
-      style={{
-        width: tileSize,
-        height: tileSize,
-        borderWidth: 1,
-      }}
-    >
-      <Text style={styles.value}>{value}</Text>
-    </View>
+    <TouchableOpacity onPress={() => tilePressHandler(value)}>
+      <View
+        style={{
+          width: tileSize,
+          height: tileSize,
+          borderWidth: 1,
+        }}
+      >
+        <Text style={styles.value}>{value}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 Tile.PropTypes = {
   gridDimension: number,
   value: number,
+  tilePressHandler: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

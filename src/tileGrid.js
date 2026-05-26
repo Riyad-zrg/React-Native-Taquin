@@ -6,6 +6,49 @@ export default function TileGrid({ dimension }) {
   const [tilesValues, setTilesValues] = useState(
     shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
   );
+
+  function shuffleTaquin({ taquinList }) {
+    for (let i = 0; i < 50; i++) {
+      const indexEmpty = taquinList.indexOf(0);
+      const random = Math.random();
+      if (random < 0.25 && taquinList[indexEmpty + 1] !== undefined) {
+        const temp = taquinList[indexEmpty];
+        taquinList[indexEmpty] = taquinList[indexEmpty + 1];
+        taquinList[indexEmpty + 1] = temp;
+      } else if (random < 0.5 && taquinList[indexEmpty - 1] !== undefined) {
+        const temp = taquinList[indexEmpty];
+        taquinList[indexEmpty] = taquinList[indexEmpty - 1];
+        taquinList[indexEmpty - 1] = temp;
+      } else if (random < 0.75 && taquinList[indexEmpty - 3] !== undefined) {
+        const temp = taquinList[indexEmpty];
+        taquinList[indexEmpty] = taquinList[indexEmpty - 3];
+        taquinList[indexEmpty - 3] = temp;
+      } else if (random < 0.75 && taquinList[indexEmpty + 3] !== undefined) {
+        const temp = taquinList[indexEmpty];
+        taquinList[indexEmpty] = taquinList[indexEmpty + 3];
+        taquinList[indexEmpty + 3] = temp;
+      }
+    }
+    return taquinList;
+  }
+
+  async function tilePress(tileNumber) {
+    const newTilesValues = [...tilesValues];
+    const indexEmpty = newTilesValues.indexOf(0);
+    const indexPressedTile = newTilesValues.indexOf(tileNumber);
+    const indexDifference = Math.abs(indexEmpty - indexPressedTile);
+    console.log(Math.abs(indexDifference));
+    if (indexDifference === 1 || indexDifference === 3) {
+      console.log("binks");
+      const temp = newTilesValues[indexEmpty];
+      newTilesValues[indexEmpty] = newTilesValues[indexPressedTile];
+      newTilesValues[indexPressedTile] = temp;
+      console.log(newTilesValues);
+    }
+
+    setTilesValues(newTilesValues);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.score}>score:42</Text>
@@ -18,7 +61,12 @@ export default function TileGrid({ dimension }) {
         }}
       >
         {tilesValues.map((number, id) => (
-          <Tile key={id} tileSize={dimension / 3} value={number} />
+          <Tile
+            key={id}
+            tileSize={dimension / 3}
+            value={number}
+            tilePressHandler={tilePress}
+          />
         ))}
       </View>
     </View>
@@ -42,30 +90,3 @@ const styles = StyleSheet.create({
     color: "gray",
   },
 });
-
-function shuffleTaquin({ taquinList }) {
-  for (let i = 0; i < 50; i++) {
-    console.log(taquinList);
-    const indexEmpty = taquinList.indexOf(0);
-    const random = Math.random();
-    if (random < 0.25 && taquinList[indexEmpty + 1] !== undefined) {
-      const temp = taquinList[indexEmpty];
-      taquinList[indexEmpty] = taquinList[indexEmpty + 1];
-      taquinList[indexEmpty + 1] = temp;
-    } else if (random < 0.5 && taquinList[indexEmpty - 1] !== undefined) {
-      const temp = taquinList[indexEmpty];
-      taquinList[indexEmpty] = taquinList[indexEmpty - 1];
-      taquinList[indexEmpty - 1] = temp;
-    } else if (random < 0.75 && taquinList[indexEmpty - 3] !== undefined) {
-      const temp = taquinList[indexEmpty];
-      taquinList[indexEmpty] = taquinList[indexEmpty - 3];
-      taquinList[indexEmpty - 3] = temp;
-    } else if (random < 0.75 && taquinList[indexEmpty + 3] !== undefined) {
-      const temp = taquinList[indexEmpty];
-      taquinList[indexEmpty] = taquinList[indexEmpty + 3];
-      taquinList[indexEmpty + 3] = temp;
-    }
-  }
-
-  return taquinList;
-}
