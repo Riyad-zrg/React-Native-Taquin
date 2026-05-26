@@ -39,7 +39,6 @@ export default function TileGrid({ dimension }) {
     const indexEmpty = newTilesValues.indexOf(0);
     const indexPressedTile = newTilesValues.indexOf(tileNumber);
     const indexDifference = Math.abs(indexEmpty - indexPressedTile);
-    console.log(Math.abs(indexDifference));
     if (indexDifference === 1 || indexDifference === 3) {
       const temp = newTilesValues[indexEmpty];
       newTilesValues[indexEmpty] = newTilesValues[indexPressedTile];
