@@ -49,12 +49,6 @@ export default function TileGrid({ dimension }) {
     const newTilesValues = [...tilesValues];
     const indexEmpty = newTilesValues.indexOf(0);
     const indexPressedTile = newTilesValues.indexOf(tileNumber);
-    console.log("la", movementDico[indexEmpty]);
-    console.log(
-      "cc",
-      indexPressedTile,
-      indexPressedTile in movementDico[indexEmpty],
-    );
     if (movementDico[indexEmpty].includes(indexPressedTile)) {
       const temp = newTilesValues[indexEmpty];
       newTilesValues[indexEmpty] = newTilesValues[indexPressedTile];
@@ -98,11 +92,12 @@ export default function TileGrid({ dimension }) {
               <Text style={styles.modalText}>Hello World!</Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={() =>
+                onPress={() => {
+                  setScore(0);
                   setTilesValues(
                     shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
-                  )
-                }
+                  );
+                }}
               >
                 <Text style={styles.textStyle}>Recommencer</Text>
               </Pressable>
