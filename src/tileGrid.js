@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Modal, Pressable, Alert } from "react-native";
 import Tile from "./tile.js";
 import { useState } from "react";
 export default function TileGrid({ dimension }) {
@@ -35,6 +35,17 @@ export default function TileGrid({ dimension }) {
   }
 
   async function tilePress(tileNumber) {
+    const movementDico = [
+      { 0: [1, 3] },
+      { 1: [0, 2, 4] },
+      { 2: [1, 5] },
+      { 3: [0, 4, 6] },
+      { 4: [1, 3, 5, 7] },
+      { 5: [2, 4, 8] },
+      { 6: [3, 4, 6] },
+      { 7: [4, 6, 8] },
+      { 8: [7, 5] },
+    ];
     const newTilesValues = [...tilesValues];
     const indexEmpty = newTilesValues.indexOf(0);
     const indexPressedTile = newTilesValues.indexOf(tileNumber);
@@ -45,7 +56,6 @@ export default function TileGrid({ dimension }) {
       newTilesValues[indexPressedTile] = temp;
       setScore(score + 1);
     }
-
     setTilesValues(newTilesValues);
   }
 
@@ -68,6 +78,32 @@ export default function TileGrid({ dimension }) {
             tilePressHandler={tilePress}
           />
         ))}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={
+            tilesValues.toString() === [1, 2, 3, 4, 5, 6, 7, 8, 0].toString()
+          }
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Hello World!</Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() =>
+                  setTilesValues(
+                    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
+                  )
+                }
+              >
+                <Text style={styles.textStyle}>Recommencer</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
       </View>
     </View>
   );
@@ -88,5 +124,45 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 20,
     color: "gray",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
