@@ -36,21 +36,26 @@ export default function TileGrid({ dimension }) {
 
   async function tilePress(tileNumber) {
     const movementDico = [
-      { 0: [1, 3] },
-      { 1: [0, 2, 4] },
-      { 2: [1, 5] },
-      { 3: [0, 4, 6] },
-      { 4: [1, 3, 5, 7] },
-      { 5: [2, 4, 8] },
-      { 6: [3, 4, 6] },
-      { 7: [4, 6, 8] },
-      { 8: [7, 5] },
+      [1, 3],
+      [0, 2, 4],
+      [1, 5],
+      [0, 4, 6],
+      [1, 3, 5, 7],
+      [2, 4, 8],
+      [3, 4, 6],
+      [4, 6, 8],
+      [7, 5],
     ];
     const newTilesValues = [...tilesValues];
     const indexEmpty = newTilesValues.indexOf(0);
     const indexPressedTile = newTilesValues.indexOf(tileNumber);
-    const indexDifference = Math.abs(indexEmpty - indexPressedTile);
-    if (indexDifference === 1 || indexDifference === 3) {
+    console.log("la", movementDico[indexEmpty]);
+    console.log(
+      "cc",
+      indexPressedTile,
+      indexPressedTile in movementDico[indexEmpty],
+    );
+    if (movementDico[indexEmpty].includes(indexPressedTile)) {
       const temp = newTilesValues[indexEmpty];
       newTilesValues[indexEmpty] = newTilesValues[indexPressedTile];
       newTilesValues[indexPressedTile] = temp;
