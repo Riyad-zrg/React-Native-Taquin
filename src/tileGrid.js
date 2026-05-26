@@ -7,6 +7,8 @@ export default function TileGrid({ dimension }) {
     shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
   );
 
+  const [score, setScore] = useState(0);
+
   function shuffleTaquin({ taquinList }) {
     for (let i = 0; i < 50; i++) {
       const indexEmpty = taquinList.indexOf(0);
@@ -39,11 +41,10 @@ export default function TileGrid({ dimension }) {
     const indexDifference = Math.abs(indexEmpty - indexPressedTile);
     console.log(Math.abs(indexDifference));
     if (indexDifference === 1 || indexDifference === 3) {
-      console.log("binks");
       const temp = newTilesValues[indexEmpty];
       newTilesValues[indexEmpty] = newTilesValues[indexPressedTile];
       newTilesValues[indexPressedTile] = temp;
-      console.log(newTilesValues);
+      setScore(score + 1);
     }
 
     setTilesValues(newTilesValues);
@@ -51,7 +52,7 @@ export default function TileGrid({ dimension }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.score}>score:42</Text>
+      <Text style={styles.score}>score:{score}</Text>
       <View
         style={{
           height: dimension,
