@@ -4,7 +4,7 @@ import Tile from "./tile.js";
 import { useState } from "react";
 export default function TileGrid({ dimension }) {
   const [tilesValues, setTilesValues] = useState(
-    shuffleTaquin({[1, 2, 3, 4, 5, 6, 7, 8, 0]}),
+    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
   );
   return (
     <View style={styles.container}>
@@ -44,12 +44,27 @@ const styles = StyleSheet.create({
 });
 
 function shuffleTaquin({ taquinList }) {
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 50; i++) {
+    console.log(taquinList);
     const indexEmpty = taquinList.indexOf(0);
-    const random = Math.randint(-1, 1);
-    const temp = taquinList[indexEmpty];
-    taquinList[indexEmpty] = taquinList[indexEmpty + random];
-    taquinList[indexEmpty + random] = temp;
+    const random = Math.random();
+    if (random < 0.25 && taquinList[indexEmpty + 1] !== undefined) {
+      const temp = taquinList[indexEmpty];
+      taquinList[indexEmpty] = taquinList[indexEmpty + 1];
+      taquinList[indexEmpty + 1] = temp;
+    } else if (random < 0.5 && taquinList[indexEmpty - 1] !== undefined) {
+      const temp = taquinList[indexEmpty];
+      taquinList[indexEmpty] = taquinList[indexEmpty - 1];
+      taquinList[indexEmpty - 1] = temp;
+    } else if (random < 0.75 && taquinList[indexEmpty - 3] !== undefined) {
+      const temp = taquinList[indexEmpty];
+      taquinList[indexEmpty] = taquinList[indexEmpty - 3];
+      taquinList[indexEmpty - 3] = temp;
+    } else if (random < 0.75 && taquinList[indexEmpty + 3] !== undefined) {
+      const temp = taquinList[indexEmpty];
+      taquinList[indexEmpty] = taquinList[indexEmpty + 3];
+      taquinList[indexEmpty + 3] = temp;
+    }
   }
 
   return taquinList;
