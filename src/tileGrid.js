@@ -9,6 +9,8 @@ export default function TileGrid({
   dimension,
   sourcePicture,
   shuffleTaquin,
+  saveScore,
+  originalTilesValues,
 }) {
   const [score, setScore] = useState(0);
 
@@ -79,6 +81,7 @@ export default function TileGrid({
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
+                  saveScore(originalTilesValues, score);
                   setScore(0);
                   setTilesValues(
                     shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
