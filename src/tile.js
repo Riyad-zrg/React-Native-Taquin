@@ -23,10 +23,9 @@ export default function Tile({
   const styles = StyleSheet.create({
     value: {
       flex: 1,
-      fontSize: 40,
-      textAlignVertical: "center",
-      textAlign: "center",
+      fontSize: 25,
       color: "black",
+      left: 5,
     },
     container: {
       width: tileSize,
@@ -35,18 +34,22 @@ export default function Tile({
       overflow: "hidden",
     },
     image: {
+      flex: 1,
       width: tileSize * 3,
       height: tileSize * 3,
-      left: ((value - 1) % 3) * tileSize,
-      top: ((value - 1) / 3) * tileSize,
+      left: -(((value - 1) % 3) * tileSize),
+      top: -(((value - 1) / 3) * tileSize),
+      position: "absolute",
+      textAlign: "center",
+      zIndex: -1,
     },
   });
 
   return (
     <TouchableOpacity onPress={() => tilePressHandler(value)}>
       <View style={styles.container}>
-        <Image style={styles.image} source={{ uri: sourcePicture }} />
         <Text style={styles.value}>{value}</Text>
+        <Image style={styles.image} source={{ uri: sourcePicture }} />
       </View>
     </TouchableOpacity>
   );
