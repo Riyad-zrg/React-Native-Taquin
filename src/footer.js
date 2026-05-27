@@ -1,9 +1,9 @@
 import { StyleSheet, View, Button } from "react-native";
 
-export default function Footer() {
+export default function Footer({ onNewPress }) {
   return (
     <View style={styles.container}>
-      <Button title={"New"} />
+      <Button title={"New"} onPress={onNewPress} />
       <Button title={"Reset"} />
     </View>
   );

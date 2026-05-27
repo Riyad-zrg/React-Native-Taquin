@@ -2,37 +2,14 @@ import PropTypes from "prop-types";
 import { Text, StyleSheet, View, Modal, Pressable, Alert } from "react-native";
 import Tile from "./tile.js";
 import { useState } from "react";
-export default function TileGrid({ dimension, sourcePicture }) {
-  const [tilesValues, setTilesValues] = useState(
-    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
-  );
-
+export default function TileGrid({
+  tilesValues,
+  setTilesValues,
+  dimension,
+  sourcePicture,
+  shuffleTaquin,
+}) {
   const [score, setScore] = useState(0);
-
-  function shuffleTaquin({ taquinList }) {
-    for (let i = 0; i < 50; i++) {
-      const indexEmpty = taquinList.indexOf(9);
-      const random = Math.random();
-      if (random < 0.25 && taquinList[indexEmpty + 1] !== undefined) {
-        const temp = taquinList[indexEmpty];
-        taquinList[indexEmpty] = taquinList[indexEmpty + 1];
-        taquinList[indexEmpty + 1] = temp;
-      } else if (random < 0.5 && taquinList[indexEmpty - 1] !== undefined) {
-        const temp = taquinList[indexEmpty];
-        taquinList[indexEmpty] = taquinList[indexEmpty - 1];
-        taquinList[indexEmpty - 1] = temp;
-      } else if (random < 0.75 && taquinList[indexEmpty - 3] !== undefined) {
-        const temp = taquinList[indexEmpty];
-        taquinList[indexEmpty] = taquinList[indexEmpty - 3];
-        taquinList[indexEmpty - 3] = temp;
-      } else if (random < 0.75 && taquinList[indexEmpty + 3] !== undefined) {
-        const temp = taquinList[indexEmpty];
-        taquinList[indexEmpty] = taquinList[indexEmpty + 3];
-        taquinList[indexEmpty + 3] = temp;
-      }
-    }
-    return taquinList;
-  }
 
   async function tilePress(tileNumber) {
     const movementDico = [
@@ -95,7 +72,9 @@ export default function TileGrid({ dimension, sourcePicture }) {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
+              <Text style={styles.modalText}>
+                Félicitations ! Tu as réussi à terminer le taquin !
+              </Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
