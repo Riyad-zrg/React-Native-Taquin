@@ -4,15 +4,14 @@ import Tile from "./tile.js";
 import { useState } from "react";
 export default function TileGrid({ dimension, sourcePicture }) {
   const [tilesValues, setTilesValues] = useState(
-    // shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
-    [1, 2, 3, 4, 5, 6, 8, 7, 0],
+    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
   );
 
   const [score, setScore] = useState(0);
 
   function shuffleTaquin({ taquinList }) {
     for (let i = 0; i < 50; i++) {
-      const indexEmpty = taquinList.indexOf(0);
+      const indexEmpty = taquinList.indexOf(9);
       const random = Math.random();
       if (random < 0.25 && taquinList[indexEmpty + 1] !== undefined) {
         const temp = taquinList[indexEmpty];
@@ -43,13 +42,18 @@ export default function TileGrid({ dimension, sourcePicture }) {
       [0, 4, 6],
       [1, 3, 5, 7],
       [2, 4, 8],
-      [3, 4, 6],
+      [3, 7],
       [4, 6, 8],
       [7, 5],
     ];
     const newTilesValues = [...tilesValues];
-    const indexEmpty = newTilesValues.indexOf(0);
-    const indexPressedTile = newTilesValues.indexOf(tileNumber);
+    const indexEmpty = tilesValues.indexOf(9);
+    const indexPressedTile = tilesValues.indexOf(tileNumber);
+    console.log(
+      indexPressedTile,
+      indexEmpty,
+      movementDico[indexEmpty].includes(indexPressedTile),
+    );
     if (movementDico[indexEmpty].includes(indexPressedTile)) {
       const temp = newTilesValues[indexEmpty];
       newTilesValues[indexEmpty] = newTilesValues[indexPressedTile];
@@ -83,7 +87,7 @@ export default function TileGrid({ dimension, sourcePicture }) {
           animationType="slide"
           transparent={true}
           visible={
-            tilesValues.toString() === [1, 2, 3, 4, 5, 6, 7, 8, 0].toString()
+            tilesValues.toString() === [1, 2, 3, 4, 5, 6, 7, 8, 9].toString()
           }
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
@@ -97,7 +101,7 @@ export default function TileGrid({ dimension, sourcePicture }) {
                 onPress={() => {
                   setScore(0);
                   setTilesValues(
-                    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 0] }),
+                    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
                   );
                 }}
               >

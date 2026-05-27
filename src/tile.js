@@ -7,19 +7,6 @@ export default function Tile({
   tilePressHandler,
   sourcePicture,
 }) {
-  if (value === 0) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          width: tileSize,
-          height: tileSize,
-          borderWidth: 1,
-        }}
-      ></View>
-    );
-  }
-
   const styles = StyleSheet.create({
     value: {
       flex: 1,
@@ -44,6 +31,18 @@ export default function Tile({
       zIndex: -1,
     },
   });
+
+  if (value === 9) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.value}>{value}</Text>
+        <Image
+          style={[styles.image, { opacity: 0.2 }]}
+          source={{ uri: sourcePicture }}
+        />
+      </View>
+    );
+  }
 
   return (
     <TouchableOpacity onPress={() => tilePressHandler(value)}>
