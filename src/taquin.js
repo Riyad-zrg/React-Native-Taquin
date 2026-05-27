@@ -12,6 +12,10 @@ export default function Taquin() {
   const [imageUri, setImageUri] = useState(
     "https://www.freedigitalphotos.net/images/img/homepage/87357.jpg",
   );
+  const [tilesValues, setTilesValues] = useState(
+    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
+  );
+  const [originalTilesValues, setOriginalTilesValues] = useState(tilesValues);
 
   const pickImage = async () => {
     const permissionResult =
@@ -31,14 +35,8 @@ export default function Taquin() {
       quality: 1,
     });
 
-    console.log("iciiiii", { uri: result["assets"][0]["uri"] });
-
     setImageUri(result["assets"][0]["uri"]);
   };
-
-  const [tilesValues, setTilesValues] = useState(
-    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
-  );
 
   function shuffleTaquin({ taquinList }) {
     for (let i = 0; i < 50; i++) {
@@ -65,8 +63,13 @@ export default function Taquin() {
     return taquinList;
   }
 
-  const onNewPress = () => {
+  const onNewPress = async () => {
     setTilesValues(shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }));
+    setOriginalTilesValues(tilesValues);
+  };
+
+  const onResetPress = async () => {
+    setTilesValues(originalTilesValues);
   };
 
   return (
@@ -86,12 +89,13 @@ export default function Taquin() {
       <TileGrid
         tilesValues={tilesValues}
         setTilesValues={setTilesValues}
+        setOriginalTilesValues={setOriginalTilesValues}
         dimension={minDimension}
         sourcePicture={imageUri}
         shuffleTaquin={shuffleTaquin}
       />
       <PictureSelector onPress={pickImage} />
-      <Footer onNewPress={onNewPress} />
+      <Footer onNewPress={onNewPress} onResetPress={onResetPress} />
     </View>
   );
 }

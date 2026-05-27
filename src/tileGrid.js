@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function TileGrid({
   tilesValues,
   setTilesValues,
+  setOriginalTilesValues,
   dimension,
   sourcePicture,
   shuffleTaquin,
@@ -82,6 +83,7 @@ export default function TileGrid({
                   setTilesValues(
                     shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
                   );
+                  setOriginalTilesValues(tilesValues);
                 }}
               >
                 <Text style={styles.textStyle}>Recommencer</Text>

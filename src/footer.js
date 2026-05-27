@@ -1,10 +1,10 @@
 import { StyleSheet, View, Button } from "react-native";
 
-export default function Footer({ onNewPress }) {
+export default function Footer({ onNewPress, onResetPress }) {
   return (
     <View style={styles.container}>
       <Button title={"New"} onPress={onNewPress} />
-      <Button title={"Reset"} />
+      <Button title={"Reset"} onPress={onResetPress} />
     </View>
   );
 }
