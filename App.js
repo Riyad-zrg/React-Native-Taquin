@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import Score from "./src/score";
 import About from "./src/about";
 
-const MyTabs = createMaterialTopTabNavigator({
+const Informations = createMaterialTopTabNavigator({
   screens: {
     Score: Score,
     About: About,
@@ -13,10 +13,10 @@ const MyTabs = createMaterialTopTabNavigator({
 });
 
 const RootStack = createNativeStackNavigator({
-  initialRouteName: "MyTabs",
+  initialRouteName: "Taquin",
   screens: {
     Taquin: Taquin,
-    MyTabs,
+    Informations,
   },
 });
 
