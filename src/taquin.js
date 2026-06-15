@@ -6,7 +6,7 @@ import PictureSelector from "./pictureSelector";
 import Footer from "./footer";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { createAsyncStorage } from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Taquin() {
   const [minDimension, setMinDimension] = useState(100);
@@ -17,10 +17,9 @@ export default function Taquin() {
     shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
   );
   const [originalTilesValues, setOriginalTilesValues] = useState(tilesValues);
-  const storage = createAsyncStorage("appDB");
 
   const saveScore = async (taquinList, score) => {
-    await storage.setItem(taquinList, score);
+    await AsyncStorage.setItem(taquinList, score);
   };
 
   const pickImage = async () => {
