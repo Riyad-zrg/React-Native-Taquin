@@ -41,7 +41,9 @@ export default function Taquin() {
       quality: 1,
     });
 
-    setImageUri(result["assets"][0]["uri"]);
+    if (!result.canceled) {
+      setImageUri(result["assets"][0]["uri"]);
+    }
   };
 
   function shuffleTaquin({ taquinList }) {
