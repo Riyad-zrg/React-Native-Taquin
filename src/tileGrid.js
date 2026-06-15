@@ -29,11 +29,6 @@ export default function TileGrid({
     const newTilesValues = [...tilesValues];
     const indexEmpty = tilesValues.indexOf(9);
     const indexPressedTile = tilesValues.indexOf(tileNumber);
-    console.log(
-      indexPressedTile,
-      indexEmpty,
-      movementDico[indexEmpty].includes(indexPressedTile),
-    );
     if (movementDico[indexEmpty].includes(indexPressedTile)) {
       const temp = newTilesValues[indexEmpty];
       newTilesValues[indexEmpty] = newTilesValues[indexPressedTile];
