@@ -35,7 +35,7 @@ export default function Tile({
   if (value === 9) {
     return (
       <View style={styles.container}>
-        <Text style={styles.value}>{value}</Text>
+        <Text style={{ left: 5, fontSize: 20, opacity: 0.2 }}>{value}</Text>
         <Image
           style={[styles.image, { opacity: 0.2 }]}
           source={{ uri: sourcePicture }}
