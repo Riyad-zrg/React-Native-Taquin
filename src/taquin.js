@@ -23,7 +23,10 @@ export default function Taquin() {
   const [originalTilesValues, setOriginalTilesValues] = useState(tilesValues);
 
   const saveScore = async (taquinList, score) => {
-    await AsyncStorage.setItem(taquinList, score);
+    const hasAlreadyBeenPlayed = await AsyncStorage.getItem(taquinList);
+    if (!hasAlreadyBeenPlayed || hasAlreadyBeenPlayed >= score) {
+      await AsyncStorage.setItem(taquinList, score);
+    }
   };
 
   const pickImage = async () => {
