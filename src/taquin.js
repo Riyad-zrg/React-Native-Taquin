@@ -7,15 +7,20 @@ import Footer from "./footer";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRoute } from "@react-navigation/native";
 
 export default function Taquin() {
+  const route = useRoute();
   const [minDimension, setMinDimension] = useState(100);
   const [imageUri, setImageUri] = useState(
     "https://images.pexels.com/photos/4961908/pexels-photo-4961908.jpeg",
   );
   const [tilesValues, setTilesValues] = useState(
-    shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
+    route.params?.taquinList
+      ? route.params?.taquinList
+      : shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
   );
+
   const [originalTilesValues, setOriginalTilesValues] = useState(tilesValues);
 
   const saveScore = async (taquinList, score) => {

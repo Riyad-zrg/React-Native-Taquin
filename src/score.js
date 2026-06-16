@@ -7,12 +7,18 @@ import {
   View,
   Modal,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
+import { FontAwesomeFreeSolid } from "@react-native-vector-icons/fontawesome-free-solid";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { Button } from "@react-navigation/elements";
+
 export default function Score() {
   const [scores, setScores] = useState([]);
   const [keys, setKeys] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
   useEffect(() => {
     const fetchScores = async () => {
       const keys = await AsyncStorage.getAllKeys();
@@ -34,9 +40,20 @@ export default function Score() {
       <View style={styles.textContainer}>
         <Text>Historique des scores</Text>
         {scores.map((game, id) => (
-          <Text key={id}>
-            {game[0]} = score : {game[1]}{" "}
-          </Text>
+          <View style={styles.scoreRow} key={id}>
+            <Text>
+              {game[0]} = score : {game[1]}
+            </Text>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Taquin", {
+                  taquinList: game[0].split(",").map(Number),
+                })
+              }
+            >
+              <FontAwesomeFreeSolid name="repeat" size={20} color="#900" />
+            </TouchableOpacity>
+          </View>
         ))}
       </View>
 
@@ -52,7 +69,7 @@ export default function Score() {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>
-              Êtes vous sur de vouloir supprimmer vos scores ?
+              Êtes vous sur de vouloir supprimer vos scores ?
             </Text>
             <Text style={styles.modalText}>(Cela est irréversible)</Text>
             <View style={styles.modalButtonsContainer}>
@@ -143,5 +160,10 @@ const styles = StyleSheet.create({
   modalButtonsContainer: {
     flexDirection: "row",
     gap: "15",
+  },
+  scoreRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
   },
 });
