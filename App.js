@@ -14,6 +14,10 @@ const Informations = createMaterialTopTabNavigator({
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: "Taquin",
+  screenOptions: {
+    headerStyle: { backgroundColor: "#7b84ff" },
+    headerTitleStyle: { color: "#ffffff" },
+  },
   screens: {
     Taquin: Taquin,
     Informations,
