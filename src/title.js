@@ -5,8 +5,8 @@ export default function Title() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Mon Taquin</Text>
-      <Button style={styles.button} screen="Informations">
-        Information
+      <Button style={styles.button} color="#ffffff" screen="Informations">
+        Informations
       </Button>
     </View>
   );
@@ -14,7 +14,7 @@ export default function Title() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "gray",
+    backgroundColor: "#ff9864",
     flex: 1,
     flexDirection: "row",
     width: "100%",
@@ -24,12 +24,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    color: "lightgray",
+    color: "#ffffff",
     fontWeight: "500",
     alignSelf: "center",
   },
   button: {
     height: 50,
     borderWidth: 2,
+    alignContent: "center",
+    justifyContent: "center",
   },
 });

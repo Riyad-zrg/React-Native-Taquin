@@ -38,7 +38,7 @@ export default function Score() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.textContainer}>
-        <Text>Historique des scores</Text>
+        <Text style={{ fontWeight: 500 }}>Historique des scores</Text>
         {scores.map((game, id) => (
           <View style={styles.scoreRow} key={id}>
             <Text>
@@ -108,7 +108,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
   },
-  textContainer: {},
+  textContainer: {
+    left: 5,
+  },
   horizontal: {
     flexDirection: "row",
     justifyContent: "space-around",
