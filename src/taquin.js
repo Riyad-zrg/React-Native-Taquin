@@ -11,7 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Taquin() {
   const [minDimension, setMinDimension] = useState(100);
   const [imageUri, setImageUri] = useState(
-    "https://www.freedigitalphotos.net/images/img/homepage/87357.jpg",
+    "https://images.pexels.com/photos/4961908/pexels-photo-4961908.jpeg",
   );
   const [tilesValues, setTilesValues] = useState(
     shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
