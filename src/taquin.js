@@ -20,7 +20,6 @@ export default function Taquin() {
       ? route.params?.taquinList
       : shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
   );
-
   const [originalTilesValues, setOriginalTilesValues] = useState(tilesValues);
 
   const saveScore = async (taquinList, score) => {
