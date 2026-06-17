@@ -5,9 +5,6 @@ export default function Title() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Mon Taquin</Text>
-      <Button style={styles.button} color="#ffffff" screen="Informations">
-        Informations
-      </Button>
     </View>
   );
 }

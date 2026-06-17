@@ -11,7 +11,7 @@ import { useRoute } from "@react-navigation/native";
 
 export default function Taquin() {
   const route = useRoute();
-  const [minDimension, setMinDimension] = useState(100);
+  const [minDimension, setMinDimension] = useState(550);
   const [imageUri, setImageUri] = useState(
     "https://images.pexels.com/photos/4961908/pexels-photo-4961908.jpeg",
   );
@@ -21,7 +21,6 @@ export default function Taquin() {
       : shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
   );
   const [originalTilesValues, setOriginalTilesValues] = useState(tilesValues);
-
   const saveScore = async (taquinList, score) => {
     const hasAlreadyBeenPlayed = await AsyncStorage.getItem(taquinList);
     if (!hasAlreadyBeenPlayed || hasAlreadyBeenPlayed >= score) {
@@ -90,18 +89,7 @@ export default function Taquin() {
   };
 
   return (
-    <View
-      style={styles.container}
-      onLayout={(event) => {
-        setMinDimension(
-          Math.min(
-            event.nativeEvent.layout.height,
-            event.nativeEvent.layout.width,
-          ),
-        );
-      }}
-    >
-      <StatusBar style="light" />
+    <View style={styles.container}>
       <Title />
       <TileGrid
         tilesValues={tilesValues}
@@ -124,6 +112,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
   },
 });

@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 6,
     flexDirection: "column",
-    width: "100%",
+    padding: "20px",
+    gap: 10,
   },
   score: {
     alignSelf: "center",
