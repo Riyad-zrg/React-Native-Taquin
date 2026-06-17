@@ -78,8 +78,11 @@ export default function Taquin() {
   }
 
   const onNewPress = async () => {
-    setTilesValues(shuffleTaquin({ taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9] }));
-    setOriginalTilesValues(tilesValues);
+    const newTaquinList = shuffleTaquin({
+      taquinList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    });
+    setTilesValues(newTaquinList);
+    setOriginalTilesValues(newTaquinList);
   };
 
   const onResetPress = async () => {
